@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pointology</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/seed.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-auth.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../js/seed.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="row">
+            <div class="col m12 nav">
+                <ul>
+                    <li><img src="https://www.vitruvianpartners.com/wp-content/uploads/placeholder-banner.png" alt="" class="col m2"></li>
+                    <li><a href="teams.html" class="col m1 offset-m6">Teams</a></li>
+                    <li><a href="tracking.html" class="col m2">"Sweet 16" Tracking</a></li>
+                    <li><button id="logout">Logout</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m10 offset-m1 seeds">
+                <h3>Seeds & Entry</h3>
+                <ul class="tabs card">
+                    <li class="tab col m6"><a href="#mens">Mens' Seeds</a></li>
+                    <li class="tab col m6"><a href="#womens">Womens' Seeds</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="contain">
+            <div class="row mens" id="mens">
+                <div class="col m10 offset-m1 center-align mensNoEntry">
+                    <h3>You have not filled out your Mens' PointEntry yet.</h3>
+                    <button id="mensFillOut">Fill out your PointEntry</button>
+                </div>
+                <div id="mensFill" class="col m10 offset-m1 center-align fillEntry">
+                    <div class="col m3 seed 1">
+                        <h4>Seed 1</h4>
+                    </div>
+                    <div class="col m3 seed 2">
+                        <h4>Seed 2</h4>
+                    </div>
+                    <div class="col m3 seed 3">
+                        <h4>Seed 3</h4>
+                    </div>
+                    <div class="col m3 seed 4">
+                        <h4>Seed 4</h4>
+                    </div>
+                    <!-- Divide -->
+                    <div class="col m3 seed 5">
+                        <h4>Seed 5</h4>
+                    </div>
+                    <div class="col m3 seed 6">
+                        <h4>Seed 6</h4>
+                    </div>
+                    <div class="col m3 seed 7">
+                        <h4>Seed 7</h4>
+                    </div>
+                    <div class="col m3 seed 8">
+                        <h4>Seed 8</h4>
+                    </div>
+                    <!-- Divide -->
+                    <div class="col m3 seed 9">
+                        <h4>Seed 9</h4>
+                    </div>
+                    <div class="col m3 seed 10">
+                        <h4>Seed 10</h4>
+                    </div>
+                    <div class="col m3 seed 11">
+                        <h4>Seed 11</h4>
+                    </div>
+                    <div class="col m3 seed 12">
+                        <h4>Seed 12</h4>
+                    </div>
+                    <!-- Divide -->
+                    <div class="col m3 seed 13">
+                        <h4>Seed 13</h4>
+                    </div>
+                    <div class="col m3 seed 14">
+                        <h4>Seed 14</h4>
+                    </div>
+                    <div class="col m3 seed 15">
+                        <h4>Seed 15</h4>
+                    </div>
+                    <div class="col m3 seed 16">
+                        <h4>Seed 16</h4>
+                    </div>
+                    <button class="col m4" id="submit">Submit Men's Entry</button>
+                </div>
+                <div class="col m10 offset-m1 mensEntry">
+                    <h3>Your Mens Entry</h3>
+                </div>
+            </div>
+            <div class="row womens" id="womens">
+                <div class="col m12 center-align womensNoEntry">
+                    <h3>You have not filled out your Womens' PointEntry yet.</h3>
+                    <button id="womensFillOut">Fill out your PointEntry</button>
+                </div>
+                <div id="womensFill" class="col m10 offset-m1 center-align fillEntry">
+                    <div class="col m3 seed w1">
+                        <h4>Seed 1</h4>
+                    </div>
+                    <div class="col m3 seed w2">
+                        <h4>Seed 2</h4>
+                    </div>
+                    <div class="col m3 seed w3">
+                        <h4>Seed 3</h4>
+                    </div>
+                    <div class="col m3 seed w4">
+                        <h4>Seed 4</h4>
+                    </div>
+                    <!-- Divide -->
+                    <div class="col m3 seed w5">
+                        <h4>Seed 5</h4>
+                    </div>
+                    <div class="col m3 seed w6">
+                        <h4>Seed 6</h4>
+                    </div>
+                    <div class="col m3 seed w7">
+                        <h4>Seed 7</h4>
+                    </div>
+                    <div class="col m3 seed w8">
+                        <h4>Seed 8</h4>
+                    </div>
+                    <!-- Divide -->
+                    <div class="col m3 seed w9">
+                        <h4>Seed 9</h4>
+                    </div>
+                    <div class="col m3 seed w10">
+                        <h4>Seed 10</h4>
+                    </div>
+                    <div class="col m3 seed w11">
+                        <h4>Seed 11</h4>
+                    </div>
+                    <div class="col m3 seed w12">
+                        <h4>Seed 12</h4>
+                    </div>
+                    <!-- Divide -->
+                    <div class="col m3 seed w13">
+                        <h4>Seed 13</h4>
+                    </div>
+                    <div class="col m3 seed w14">
+                        <h4>Seed 14</h4>
+                    </div>
+                    <div class="col m3 seed w15">
+                        <h4>Seed 15</h4>
+                    </div>
+                    <div class="col m3 seed w16">
+                        <h4>Seed 16</h4>
+                    </div>
+                    <button class="col m4" id="womensSubmit">Submit Men's Entry</button>
+                </div>
+                <div class="col m10 offset-m1 womensEntry">
+                    <h3>Your Womens Entry</h3>
+                </div>
+            </div>
+        </div>
+        <footer style="margin-bottom: 0px !important;" class="row">
+            <div class="col m10 offset-m1 title">
+                <h3>Pointology</h3>
+                <div class="col m4">
+                    <h5>Navigation</h5>
+                    <ul>
+                        <li class="col m12"><a href="index.html">Home</a></li>
+                        <li class="col m12"><a href="about.html">About Pointology</a></li>
+                        <li class="col m12"><a href="login.html">Login</a></li>
+                        <li class="col m12"><a href="" >Sign Up</a></li>
+                    </ul>
+                </div>
+                <div class="col m12 tm">
+                    <h3>&trade;</h3>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

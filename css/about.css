@@ -1,0 +1,30 @@
+body {
+    --carolinaBlue: #99badd;
+    --white: #FFFFFF;
+    --navyBlue: #0C2340;
+    --gold: #C99700;
+}
+
+h2 {
+    color: white;
+    padding-top: 12%;
+    font-size: 80px !important;
+}
+
+ul a {
+    color: black;
+}
+
+.tm {
+    padding-top: 50px !important;
+}
+
+.nav {
+    height: 120px;
+}
+
+.aboutBanner{
+    background-color: var(--navyBlue);
+    height: 60vh;
+}
+
