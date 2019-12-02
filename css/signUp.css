@@ -5,6 +5,10 @@ body {
     --gold: #C99700;
 }
 
+i {
+    color: var(--navyBlue);
+}
+
 h2 {
     color: white;
     padding-top: 12%;

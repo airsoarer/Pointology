@@ -1,3 +1,17 @@
+@media screen and (max-width: 601px){
+    h2 {
+        margin-top: 50px !important;
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+    .row {
+        margin-bottom: 0px !important;
+    }
+}
+
 body {
     --carolinaBlue: #99badd;
     --white: #FFFFFF;
@@ -9,6 +23,8 @@ h2 {
     color: white;
     padding-top: 12%;
     font-size: 80px !important;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
 }
 
 ul a {
@@ -26,5 +42,7 @@ ul a {
 .aboutBanner{
     background-color: var(--navyBlue);
     height: 60vh;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
 }
 

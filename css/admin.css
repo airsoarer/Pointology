@@ -1,3 +1,9 @@
+@media screen and (max-height: 601px){
+    .collapsible-body {
+        height: auto !important;
+    }
+}
+
 body {
     --carolinaBlue: #99badd;
     --white: #FFFFFF;

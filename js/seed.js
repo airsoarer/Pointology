@@ -147,6 +147,7 @@
                     console.log(i+1);
                     let div = document.createElement("div");
                     div.classList.add("col");
+                    div.classList.add("s6");
                     div.classList.add("m3");
     
                     let h5 = document.createElement("h5");
@@ -175,6 +176,7 @@
                     console.log(i+1);
                     let div = document.createElement("div");
                     div.classList.add("col");
+                    div.classList.add("s6");
                     div.classList.add("m3");
     
                     let h5 = document.createElement("h5");

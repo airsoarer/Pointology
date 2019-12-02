@@ -51,6 +51,7 @@
             for(let i = 0; i < data.EntryArray.length; i++){
                 let div = document.createElement("div");
                 div.classList.add("col");
+                div.classList.add("s6");
                 div.classList.add("m3");
                 divBody.appendChild(div);
 
@@ -96,6 +97,7 @@
             for(let i = 0; i < data.EntryArray.length; i++){
                 let div = document.createElement("div");
                 div.classList.add("col");
+                div.classList.add("s6");
                 div.classList.add("m3");
                 divBody.appendChild(div);
 
@@ -179,7 +181,7 @@
 
     function logout(){
         firebase.auth().signOut().then(() => {
-            location.replace("../html/index.html");
+            location.replace("../html/adminLogin.html");
         });    
     }
 })();

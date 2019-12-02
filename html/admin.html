@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/seed.css">
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-database.js"></script>
@@ -15,29 +16,40 @@
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../js/main.js"></script>
     <script src="../js/admin.js"></script>
 </head>
 <body>
     <div class="wrapper">
         <div class="row">
-            <div class="col m12 nav">
-                <ul>
-                    <li><img src="https://www.vitruvianpartners.com/wp-content/uploads/placeholder-banner.png" alt="" class="col m2"></li>
-                    <li><a href="teams.html" class="col m1 offset-m6">Teams</a></li>
-                    <li><a href="tracking.html" class="col m2">"Sweet 16" Tracking</a></li>
+            <div class="col s12 m12 nav">
+                <div class="col s1 offset-m1 hide-on-med-and-up">
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons medium">menu</i></a>
+                </div>
+                <div class="col m12 hide-on-small-only">
+                    <ul>
+                        <li><img src="https://www.vitruvianpartners.com/wp-content/uploads/placeholder-banner.png" alt="" class="col m2"></li>
+                        <li><a href="teams.html" class="col m1 offset-m6">Teams</a></li>
+                        <li><a href="tracking.html" class="col m2">"Sweet 16" Tracking</a></li>
+                        <li><button id="logout">Logout</button></li>
+                    </ul>
+                </div>
+                <ul class="sidenav center-align" id="slide-out">
+                    <li><a href="teams.html" class="col s12">Teams</a></li>
+                    <li><a href="tracking.html" class="col s12">"Sweet 16" Tracking</a></li>
                     <li><button id="logout">Logout</button></li>
                 </ul>
             </div>
         </div>
         <div class="row bodyContain">
-            <div class="col m10 offset-m1">
+            <div class="col s12 m10 offset-m1">
                 <h3>Submited Entries</h3>
                 <ul class="tabs card">
-                    <li class="tab col m6"><a href="#mens">Mens Teams Entries</a></li>
-                    <li class="tab col m6"><a href="#womens">Womens Teams Entries</a></li>
+                    <li class="tab col s6 m6"><a href="#mens">Mens Teams Entries</a></li>
+                    <li class="tab col s6 m6"><a href="#womens">Womens Teams Entries</a></li>
                 </ul>
             </div>
-            <div class="col m10 offset-m1 center-align" id="mens">
+            <div class="col s12 m10 offset-m1 center-align" id="mens">
                 <div class="center-align" style="box-shadow: none;" id="noMensSeed">
                     <h3>Create this Year's March Madness Mens' Seeds</h3>
                     <button id="createMensSeeds">Create Mens' Seeds</button>
@@ -45,28 +57,28 @@
                 <div class="center-align" id="mensSeeds">
                     <h3>Enter Seeds</h3>
                     <div class="contain">
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 1</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 2</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 3</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 4</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
@@ -75,28 +87,28 @@
                         </div>
                     </div>
                     <div class="contain">
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 5</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 6</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 7</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 8</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
@@ -105,28 +117,28 @@
                         </div>
                     </div>
                     <div class="contain">
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 9</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 10</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 11</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 12</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
@@ -135,28 +147,28 @@
                         </div>
                     </div>
                     <div class="contain">
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 13</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 14</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 15</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 16</h4>
                             <input type="text" class="seedOne">
                             <input type="text" class="seedOne">
@@ -165,7 +177,7 @@
                         </div>
                     </div>
                     <div class="contain">
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Extra</h4>
                             <input placeholder="Seed 11" type="text" class="seedOne">
                             <input placeholder="Seed 11" type="text" class="seedOne">
@@ -178,7 +190,7 @@
                 </div>
                 <ul class="collapsible mensCollapsible"></ul>
             </div>
-            <div class="col m10 offset-m1 center-align" id="womens">
+            <div class="col s12 m10 offset-m1 center-align" id="womens">
                 <div class="center-align" style="box-shadow: none;" id="noWomensSeed">
                     <h3>Create this Year's March Madness Womens' Seeds</h3>
                     <button id="createWomensSeeds">Create Womens' Seeds</button>
@@ -186,28 +198,28 @@
                 <div class="center-align" id="womensSeeds">
                     <h3>Enter Seeds</h3>
                     <div class="contain">
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 1</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 2</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 3</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 4</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
@@ -216,28 +228,28 @@
                         </div>
                     </div>
                     <div class="contain">
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 5</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 6</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 7</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 8</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
@@ -246,28 +258,28 @@
                         </div>
                     </div>
                     <div class="contain">
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 9</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 10</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 11</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 12</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
@@ -276,28 +288,28 @@
                         </div>
                     </div>
                     <div class="contain">
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 13</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 14</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 15</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
                         </div>
-                        <div id="inputFields" class="col m3">
+                        <div id="inputFields" class="col s6 m3">
                             <h4>Seed 16</h4>
                             <input type="text" class="seedTwo">
                             <input type="text" class="seedTwo">
@@ -312,19 +324,19 @@
             </div>
         </div>
         <footer style="margin-bottom: 0px !important;" class="row">
-            <div class="col m10 offset-m1 title">
-                <h3>Pointology</h3>
+            <div class="col m10 offset-m1 left-align title">
+                <h3 class="left-align">Pointology</h3>
                 <div class="col m4">
                     <h5>Navigation</h5>
                     <ul>
-                        <li class="col m12"><a href="index.html">Home</a></li>
-                        <li class="col m12"><a href="about.html">About Pointology</a></li>
-                        <li class="col m12"><a href="login.html">Login</a></li>
-                        <li class="col m12"><a href="" >Sign Up</a></li>
+                        <li class="col s12 m12"><a href="index.html">Home</a></li>
+                        <li class="col s12 m12"><a href="about.html">About Pointology</a></li>
+                        <li class="col s12 m12"><a href="login.html">Login</a></li>
+                        <li class="col s12 m12"><a href="signUp.html" >Sign Up</a></li>
                     </ul>
                 </div>
-                <div class="col m12 tm">
-                    <h3>&trade;</h3>
+                <div class="col s12 m12 left-align tm">
+                    <h3 class="left-align">&trade;</h3>
                 </div>
             </div>
         </footer>

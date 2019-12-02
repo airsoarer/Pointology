@@ -10,6 +10,10 @@ body {
     --gold: #C99700;
 }
 
+i {
+    color: white;
+}
+
 footer {
     background-color: var(--navyBlue);
     height: 400px;
@@ -78,5 +82,14 @@ p {
 
 .nav img {
     padding-bottom: 20px !important;
+}
+
+.sidenav {
+    background-color: var(--navyBlue) !important;
+}
+
+.sidenav li a {
+    color: white !important;
+    font-size: 18px !important;
 }
 

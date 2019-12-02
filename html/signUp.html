@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/signUp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-database.js"></script>
@@ -14,35 +15,45 @@
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../js/main.js"></script>
     <script src="../js/signUp.js"></script>
 </head>
 <body>
     <div class="wrapper">
         <div class="row">
-            <div class="col m12 nav">
+            <div class="col s1 offset-m1 hide-on-med-and-up">
+                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons medium">menu</i></a>
+            </div>
+            <div class="col m12 hide-on-small-only nav">
                 <ul>
-                    <li><img src="https://www.vitruvianpartners.com/wp-content/uploads/placeholder-banner.png" alt="" class="col m2"></li>
+                    <li><img src="https://www.vitruvianpartners.com/wp-content/uploads/placeholder-banner.png" alt="" class="col m2 hide-on-small"></li>
                     <li><a href="about.html" class="col m2 offset-m6">About Pointology</a></li>
                     <li><a href="login.html" class="col m1">Login</a></li>
                     <li><a href="signUp.html" class="col m1">Sign Up</a></li>
                 </ul>
             </div>
+            <ul class="sidenav center-align" id="slide-out">
+                <li><a href="index.html" class="col s12">Pointology</a></li>
+                <li><a href="about.html" class="col s12">About Pointology</a></li>
+                <li><a href="login.html" class="col s12">Login</a></li>
+                <li><a href="signUp.html" class="col s12">Sign Up</a></li>
+            </ul>
         </div>
         <div class="row">
-            <div class="col m6 offset-m3 signUp">
+            <div class="col s12 m6 offset-m3 signUp">
                 <h3 style="text-align: center !important;">Sign Up</h3>
                 <br>
-                <div class="col m6" style="padding-left: 0px !important;">
+                <div class="col s6 m6" style="padding-left: 0px !important;">
                     <label for="fname">First Name</label>
                     <input type="text" id="fname" class="col m12">
                 </div>
-                <div class="col m6" style="padding-right: 0px !important;">
+                <div class="col s6 m6" style="padding-right: 0px !important;">
                     <label for="lname">Last Name</label>
                     <input type="text" id="lname" class="col m12">
                 </div>
                 <label for="email">Email</label>
-                <input type="email" id="email" class="col m12">
-                <div class="input-field col m6" style="padding-left: 0px !important; padding-top: 9px !important;">
+                <input type="email" id="email" class="col s12 m12">
+                <div class="input-field col s6 m6" style="padding-left: 0px !important; padding-top: 9px !important;">
                     <select id="states">
                         <option value="Alabama">Alabama</option>
                         <option value="Alaska">Alaska</option>
@@ -97,11 +108,11 @@
                     </select>
                     <label>State</label>
                 </div>
-                <div class="col m6" style="padding-right: 0px !important;">
+                <div class="col s6 m6" style="padding-right: 0px !important;">
                     <label for="city">City</label>
                     <input type="text" id="city" class="col m12">
                 </div>
-                <div class="col m12">
+                <div class="col s12 m12">
                     <p class="left-align">Please enter a strong password; enter 8 or more characters, using at least one numbner</p>
                     <label for="passOne">Password</label>
                     <input type="password" id="passOne" class="col m12">
@@ -109,23 +120,23 @@
                     <label for="passTwo">Re-enter Password</label>
                     <input type="password" id="passTwo" class="col m12">
                 </div>
-                <button id="enter" class="col m4">Enter</button>
+                <button id="enter" class="col s4 m4">Enter</button>
             </div>
         </div>
         <footer style="margin-bottom: 0px !important;" class="row">
-            <div class="col m10 offset-m1 title">
-                <h3>Pointology</h3>
+            <div class="col m10 offset-m1 left-align title">
+                <h3 class="left-align">Pointology</h3>
                 <div class="col m4">
                     <h5>Navigation</h5>
                     <ul>
-                        <li class="col m12"><a href="index.html">Home</a></li>
-                        <li class="col m12"><a href="about.html">About Pointology</a></li>
-                        <li class="col m12"><a href="login.html">Login</a></li>
-                        <li class="col m12"><a href="" >Sign Up</a></li>
+                        <li class="col s12 m12"><a href="index.html">Home</a></li>
+                        <li class="col s12 m12"><a href="about.html">About Pointology</a></li>
+                        <li class="col s12 m12"><a href="login.html">Login</a></li>
+                        <li class="col s12 m12"><a href="signUp.html" >Sign Up</a></li>
                     </ul>
                 </div>
-                <div class="col m12 tm">
-                    <h3>&trade;</h3>
+                <div class="col s12 m12 left-align tm">
+                    <h3 class="left-align">&trade;</h3>
                 </div>
             </div>
         </footer>

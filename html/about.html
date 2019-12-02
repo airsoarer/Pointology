@@ -6,24 +6,44 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-auth.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../js/main.js"></script>
 </head>
 <body>
     <div class="wrapper">
         <div class="row">
-            <div class="col m12 nav">
+            <div class="col m12 hide-on-small-only nav">
                 <ul>
-                    <li><a href="index.html"><img src="https://www.vitruvianpartners.com/wp-content/uploads/placeholder-banner.png" alt="" class="col m2"></a></li>
+                    <li><img src="https://www.vitruvianpartners.com/wp-content/uploads/placeholder-banner.png" alt="" class="col m2 hide-on-small"></li>
                     <li><a href="about.html" class="col m2 offset-m6">About Pointology</a></li>
                     <li><a href="login.html" class="col m1">Login</a></li>
-                    <li><a href="" class="col m1">Sign Up</a></li>
+                    <li><a href="signUp.html" class="col m1">Sign Up</a></li>
                 </ul>
             </div>
         </div>
+        <ul class="sidenav center-align" id="slide-out">
+            <li><a href="index.html" class="col s12">Pointology</a></li>
+            <li><a href="about.html" class="col s12">About Pointology</a></li>
+            <li><a href="login.html" class="col s12">Login</a></li>
+            <li><a href="signUp.html" class="col s12">Sign Up</a></li>
+        </ul>
         <div class="row aboutBanner">
-            <h2 class="center-align">About</h2>
+            <h2 class="center-align hide-on-small-only">About</h2>
+            <div class="col s12 offset-m1 hide-on-med-and-up">
+                <a href="#" data-target="slide-out" class="col s1 sidenav-trigger"><i class="material-icons medium">menu</i></a>
+                <h2 class="col s12 center-align">About</h2>
+            </div>
         </div>
         <div class="row about">
-            <div class="col m10 offset-m1">
+            <div class="col s12 m10 offset-m1">
                 <h3>What is Pointology?</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus asperiores suscipit quia praesentium nihil, id pariatur maiores ratione esse, adipisci aspernatur facere consectetur! Aliquam deleniti sed minima nostrum qui voluptate. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto ipsum, impedit odit modi fuga vitae recusandae sunt aliquid rerum qui ratione pariatur consectetur laudantium at iure praesentium cupiditate delectus commodi.</p>
                 <br>
@@ -31,30 +51,30 @@
             </div>
         </div>
         <div class="row creator">
-            <div class="col m10 offset-m1">
+            <div class="col s12 m10 offset-m1">
                 <h3>About the Creator</h3>
-                <div class="col m4">
+                <div class="col s8 offset-s2 m4">
                     <img src="https://i0.wp.com/acaweb.org/wp-content/uploads/2018/12/profile-placeholder.png?fit=300%2C300&ssl=1">
                 </div>
-                <div class="col m8">
+                <div class="col s12 m8">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis sequi repellat tempore quod asperiores fugit, inventore consequatur perspiciatis et blanditiis illum mollitia ducimus laborum praesentium maiores maxime. Possimus, repellendus a? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, perferendis pariatur, doloremque fuga distinctio, ullam vero iste voluptates earum consequatur optio enim? Nostrum nihil corrupti delectus fuga, nam ipsa similique.</p>
                 </div>
             </div>
         </div>
         <footer style="margin-bottom: 0px !important;" class="row">
-            <div class="col m10 offset-m1 title">
-                <h3>Pointology</h3>
+            <div class="col m10 offset-m1 left-align title">
+                <h3 class="left-align">Pointology</h3>
                 <div class="col m4">
                     <h5>Navigation</h5>
                     <ul>
-                        <li class="col m12"><a href="index.html">Home</a></li>
-                        <li class="col m12"><a href="about.html">About Pointology</a></li>
-                        <li class="col m12"><a href="login.html">Login</a></li>
-                        <li class="col m12"><a href="signUp.html" >Sign Up</a></li>
+                        <li class="col s12 m12"><a href="index.html">Home</a></li>
+                        <li class="col s12 m12"><a href="about.html">About Pointology</a></li>
+                        <li class="col s12 m12"><a href="login.html">Login</a></li>
+                        <li class="col s12 m12"><a href="signUp.html" >Sign Up</a></li>
                     </ul>
                 </div>
-                <div class="col m12 tm">
-                    <h3>&trade;</h3>
+                <div class="col s12 m12 left-align tm">
+                    <h3 class="left-align">&trade;</h3>
                 </div>
             </div>
         </footer>
