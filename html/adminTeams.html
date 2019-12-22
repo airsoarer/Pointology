@@ -4,7 +4,9 @@
     <title>Pointology</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/login.css">
+    <!-- <link rel="stylesheet" href="../css/seed.css"> -->
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/adminTeams.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -16,40 +18,44 @@
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/login.js"></script>
+    <script src="../js/adminTeams.js"></script>
 </head>
 <body>
     <div class="wrapper">
         <div class="row">
-            <div class="col s1 offset-m1 hide-on-med-and-up">
-                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons medium">menu</i></a>
-            </div>
-            <div class="col m12 hide-on-small-only nav">
-                <ul>
-                    <li><img src="../images/banner.PNG" alt="" class="col m2 hide-on-small"></li>
-                    <li><a href="about.html" class="col m2 offset-m6">About Pointology</a></li>
-                    <li><a href="login.html" class="col m1">Login</a></li>
-                    <li><a href="signUp.html" class="col m1">Sign Up</a></li>
+            <div class="col s12 m12 nav">
+                <div class="col s1 offset-m1 hide-on-med-and-up">
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons medium">menu</i></a>
+                </div>
+                <div class="col m12 hide-on-small-only">
+                    <ul>
+                        <li><img src="../images/banner.PNG" alt="" class="col m2"></li>
+                        <li><a href="admin.html" class="col m1 offset-m5">Entries</a></li>
+                        <li><a href="adminTeams.html" class="col m1">Teams</a></li>
+                        <li><a href="adminTracking.html" class="col m2">"Sweet 16" Tracking</a></li>
+                        <li><button id="logout">Logout</button></li>
+                    </ul>
+                </div>
+                <ul class="sidenav center-align" id="slide-out">
+                    <li><a href="admin.html" class="col s12">Entries</a></li>
+                    <li><a href="adminTeams.html" class="col s12">Teams</a></li>
+                    <li><a href="adminTracking.html" class="col s12">"Sweet 16" Tracking</a></li>
+                    <li><button id="logout">Logout</button></li>
                 </ul>
             </div>
-            <ul class="sidenav center-align" id="slide-out">
-                <li><a href="index.html" class="col s12">Pointology</a></li>
-                <li><a href="about.html" class="col s12">About Pointology</a></li>
-                <li><a href="login.html" class="col s12">Login</a></li>
-                <li><a href="signUp.html" class="col s12">Sign Up</a></li>
-            </ul>
         </div>
         <div class="row">
-            <div class="col s12 m6 offset-m3 login">
-                <h3 style="text-align: center !important;">Login</h3>
-                <br>
-                <label for="email">Email</label>
-                <input type="email" id="email" class="col m12">
-                <br style="height: 500px;">
-                <label for="pass">Password</label>
-                <input type="password" id="pass" class="col m12">
-                <button id="enter" class="col s4 m4">Enter</button>
+            <div class="col s12 m10 offset-m1">
+                <h3>Teams & Scores</h3>
+                <ul class="tabs card">
+                    <li class="tab col s6 m6"><a href="#mens">Mens Teams Entries</a></li>
+                    <li class="tab col s6 m6"><a href="#womens">Womens Teams Entries</a></li>
+                </ul>
             </div>
+        </div>
+        <div class="row teamContain">
+            <div class="col s12 m10 offset-m1" id="mens"></div>
+            <div class="col s12 m10 offset-m1" id="womens"></div>
         </div>
         <footer style="margin-bottom: 0px !important;" class="row">
             <div class="col m10 offset-m1 left-align title">

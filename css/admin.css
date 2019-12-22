@@ -70,3 +70,32 @@ ul a {
     height: 80vh;
 }
 
+.tabs {
+    background-color: transparent !important;
+    color: var(--navyBlue) !important;
+}
+
+.tabs li a {
+    background-color: transparent;
+    color: var(--navyBlue) !important;
+    font-size: 16px !important;
+}
+
+.tabs .tab  a {
+    color: var(--navyBlue) !important;
+}
+
+.tabs .tab  a:hover {
+    color: var(--navyBlue) !important;
+}
+
+.tabs .tab  a:focus.active {
+    color: var(--navyBlue) !important;
+    background-color: transparent !important;
+    opacity: .8;
+}
+
+.tabs .indicator {
+    background-color: var(--navyBlue) !important;
+}
+

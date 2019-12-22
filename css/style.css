@@ -10,6 +10,11 @@ body {
     --gold: #C99700;
 }
 
+#list {
+    list-style-type: circle !important;
+    margin-left: 50px !important;
+}
+
 i {
     color: white;
 }
@@ -54,8 +59,8 @@ p {
 }
 
 .banner {
-    background-image: url("../images/court.jpg");
-    background-size: cover;
+    background-image: url("../images/banner.png");
+    background-size: contain;
     height: 100vh;
 }
 

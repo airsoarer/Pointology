@@ -40,7 +40,9 @@
                     }).then(() => {
                         firebase.database().ref("Users/" + uid + "/Entries").set({
                             MensEntrySubmitted:false,
-                            WomensEntrySubmitted:false
+                            WomensEntrySubmitted:false,
+                            MensScore:0,
+                            WomensScore:0
                         });
                     }).then(() => {
                         location.replace("../html/seed.html");

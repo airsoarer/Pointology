@@ -66,8 +66,12 @@
 
             let currentScore = document.createElement("h4");
             currentScore.classList.add("score");
-            currentScore.textContent = "Current Score: ";
             divBody.appendChild(currentScore);
+
+            firebase.database().ref("Users/" + data.UID).on("value", (snapshot) => {
+                let data = snapshot.val();
+                currentScore.textContent = "Current Score: " + data.Entries.MensScore + "pts";
+            });
 
             $(".mensCollapsible").append(li);
         });
@@ -112,8 +116,12 @@
 
             let currentScore = document.createElement("h4");
             currentScore.classList.add("score");
-            currentScore.textContent = "Current Score: ";
             divBody.appendChild(currentScore);
+
+            firebase.database().ref("Users/" + data.UID).on("value", (snapshot) => {
+                let data = snapshot.val();
+                currentScore.textContent = "Current Score: " + data.Entries.WomensScore + "pts";
+            });
 
             $(".womensCollapsible").append(li);
         });
@@ -143,6 +151,19 @@
                 return Value;
             });
         }).then(() => {
+            for(i in teamsArr){
+                teamsArr[i];
+                firebase.database().ref("Seeds/Womens/TeamsScore/" + teamsArr[i]).set({
+                    1:0,
+                    2:0,
+                    3:0,
+                    4:0,
+                    5:0,
+                    6:0,
+                    7:0
+                });
+            }
+        }).then(() => {
             $("#womensSeeds").css("display", "none");
             $(".womensCollapsible").css("display", "block");
         });
@@ -163,6 +184,19 @@
                 Value = true
                 return Value;
             });
+        }).then(() => {
+            for(i in teamsArr){
+                teamsArr[i];
+                firebase.database().ref("Seeds/Mens/TeamsScore/" + teamsArr[i]).set({
+                    1:0,
+                    2:0,
+                    3:0,
+                    4:0,
+                    5:0,
+                    6:0,
+                    7:0
+                });
+            }
         }).then(() => {
             $("#mensSeeds").css("display", "none");
             $(".mensCollapsible").css("display", "block");

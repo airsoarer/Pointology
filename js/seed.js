@@ -9,7 +9,8 @@
         messagingSenderId: "404283995990",
         appId: "1:404283995990:web:fa100e3015ce504f2648f7"
     };
-    uid = ""
+    uid = "";
+    userTotal = 0;
 
     function init(){
         firebase.initializeApp(firebaseConfig);
@@ -30,6 +31,13 @@
                 $(".womensNoEntry").css("display", "none");
                 $(".womensEntry").css("display", "block");
             }
+
+            $("#mensPointScore").css("color", "#99BADD");
+            $("#womensPointScore").css("color", "#FFFFFF");
+
+            // console.log(data);
+            let score = data.Entries.MensScore;
+            $("#score").text(score.toString() + "pts");
         });
 
         firebase.database().ref("Seeds/Mens").on("value", (snapshot) => {
@@ -140,11 +148,12 @@
             }
         });
 
+        // Post Mens Teams and the Score
         firebase.database().ref("Users/" + uid).on("child_added", (snapshot) => {
             let data = snapshot.val();
             if(data.Entries.MensEntrySubmitted){
                 for(let i = 0; i < data.Entries.MensEntry.length; i++){
-                    console.log(i+1);
+                    // console.log(i+1);
                     let div = document.createElement("div");
                     div.classList.add("col");
                     div.classList.add("s6");
@@ -153,27 +162,59 @@
                     let h5 = document.createElement("h5");
                     h5.textContent = "Seed " + (i+1) + " Choice: ";
                     div.appendChild(h5);
-    
+
                     let p = document.createElement("p");
-                    p.textContent = data.Entries.MensEntry[i];
-                    div.appendChild(p);
-    
+
+                    let ref = data.Entries.MensEntry[i];
+
+                    firebase.database().ref("Seeds/Mens/TeamsScore").on("value", (snapshot) => {
+                        let dataTwo = snapshot.val();
+                        let team = dataTwo[ref];
+                        let total = 0;
+                        for(i in team){
+                            total += parseInt(team[i]);
+                        }
+
+                        p.textContent = ref + ": " + total + "pts";
+                        div.appendChild(p);
+                    })
+
                     $(".mensEntry").append(div);
+
+                    firebase.database().ref("Seeds/Mens/TeamsScore/" + data.Entries.MensEntry[i]).on("value", (snapshot) => {
+                        let dataTwo = snapshot.val();
+                        for(i in dataTwo){
+                            userTotal += parseInt(dataTwo[i]);
+                        }
+
+                        if(userTotal > data.Entries.MensScore){
+                            firebase.database().ref("Users/" + uid + "/Entries").child("MensScore").transaction((Value) => {
+                                Value = userTotal;
+                                return Value;
+                            }).then(() => {
+                                $("#score").text(data.Entries.MensScore + "pts")
+                            });
+                        }else{
+                            $("#score").text(data.Entries.MensScore + "pts");
+                        }
+                    });
                 }
     
                 let score = document.createElement("h4");
                 score.textContent = "Your current score is: ";
                 $(score).css("padding-top", "30px !important");
     
-                $(".mensEntry").append(score);
+                // $(".mensEntry").append(score);
             }
+
+            // console.log(data);
         });
 
+        // Post Womens teams and the scores
         firebase.database().ref("Users/" + uid).on("child_added", (snapshot) => {
             let data = snapshot.val();
             if(data.Entries.WomensEntrySubmitted){
                 for(let i = 0; i < data.Entries.WomensEntry.length; i++){
-                    console.log(i+1);
                     let div = document.createElement("div");
                     div.classList.add("col");
                     div.classList.add("s6");
@@ -184,19 +225,47 @@
                     div.appendChild(h5);
     
                     let p = document.createElement("p");
-                    p.textContent = data.Entries.WomensEntry[i];
-                    div.appendChild(p);
+
+                    let ref = data.Entries.WomensEntry[i];
+
+                    firebase.database().ref("Seeds/Womens/TeamsScore").on("value", (snapshot) => {
+                        let dataTwo = snapshot.val();
+                        let team = dataTwo[ref];
+                        let total = 0;
+                        for(i in team){
+                            total += parseInt(team[i]);
+                        }
+
+                        p.textContent = ref + ": " + total + "pts";
+                        div.appendChild(p);
+                    })
     
                     $(".womensEntry").append(div);
+
+                    firebase.database().ref("Seeds/Womens/TeamsScore/" + data.Entries.WomensEntry[i]).on("value", (snapshot) => {
+                        let dataTwo = snapshot.val();
+                        for(i in dataTwo){
+                            userTotal += parseInt(dataTwo[i]);
+                        }
+
+                        if(userTotal > data.Entries.MensScore){
+                            firebase.database().ref("Users/" + uid + "/Entries").child("WomensScore").transaction((Value) => {
+                                Value = userTotal;
+                                return Value;
+                            });
+                        }
+                    });
                 }
     
                 let score = document.createElement("h4");
                 score.textContent = "Your current score is: ";
                 $(score).css("padding-top", "30px !important");
     
-                $(".womensEntry").append(score);
+                // $(".womensEntry").append(score);
             }
-        });        
+        });
+
+        // mensPoints();
 
         $('.tabs').tabs();
         $("#logout").on("click", logout);
@@ -204,6 +273,29 @@
         $("#womensSubmit").on("click", submitWomens);
         $("#mensFillOut").on("click", showMensForm);
         $("#womensFillOut").on("click", showWomensForm);
+        $("#mensPointScore").on("click", mensPoints);
+        $("#womensPointScore").on("click", womensPoints);
+    }
+
+    function mensPoints(){
+        $("#mensPointScore").css("color", "#99BADD");
+        $("#womensPointScore").css("color", "#FFFFFF");
+        firebase.database().ref("Users/" + uid).on("value", (snapshot) => {
+            let data = snapshot.val();
+            console.log(data);
+            let score = data.Entries.MensScore;
+            $("#score").text(score.toString() + "pts");
+        });
+    }
+
+    function womensPoints(){
+        $("#womensPointScore").css("color", "#99BADD");
+        $("#mensPointScore").css("color", "#FFFFFF");
+        firebase.database().ref("Users/" + uid).on("value", (snapshot) => {
+            let data = snapshot.val();
+            console.log(data);
+            $("#score").text(data.Entries.WomensScore.toString() + "pts");
+        });
     }
 
     function showWomensForm(){
