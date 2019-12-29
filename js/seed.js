@@ -11,257 +11,259 @@
     };
     uid = "";
     userTotal = 0;
+    womensUserTotal = 0;
 
     function init(){
         firebase.initializeApp(firebaseConfig);
         firebase.auth().onAuthStateChanged((user) => {
             if(user){
                 uid = user.uid
-            }
-        });
 
-        firebase.database().ref("Users/" + uid).on("child_added", (snapshot) => {
-            let data = snapshot.val();
-            if(data.Entries.MensEntrySubmitted){
-                $(".mensNoEntry").css("display", "none");
-                $(".mensEntry").css("display", "block");
-            }
-
-            if(data.Entries.WomensEntrySubmitted){
-                $(".womensNoEntry").css("display", "none");
-                $(".womensEntry").css("display", "block");
-            }
-
-            $("#mensPointScore").css("color", "#99BADD");
-            $("#womensPointScore").css("color", "#FFFFFF");
-
-            // console.log(data);
-            let score = data.Entries.MensScore;
-            $("#score").text(score.toString() + "pts");
-        });
-
-        firebase.database().ref("Seeds/Mens").on("value", (snapshot) => {
-            let data = snapshot.val();
-            let y = 1;
-            let x = 1;
-            $(".contain").css("height", "auto");
-            $(".seed").css("height", "350px");
-
-            for(let i = 0; i < data.MensSeedArray.length; i++){
-                if(i === 64 || i === 65){
-                    y = 11;
-                }else if(i === 66 || i === 67){
-                    y = 16;
-                }else{
-                    if(i % 4 === 0 && i != 0){
-                        y++;
+                firebase.database().ref("Users/" + uid).once("child_added", (snapshot) => {
+                    let data = snapshot.val();
+                    if(data.MensEntrySubmitted){
+                        $(".mensNoEntry").css("display", "none");
+                        $(".mensEntry").css("display", "block");
                     }
-                }
-
-                // p
-                let p = document.createElement("p");
-
-                // Label
-                let label = document.createElement("label");
-                p.appendChild(label);
-
-                // input
-                let input = document.createElement("input");
-                input.type = "radio"
-                input.name = "group" + y;
-                input.value = data.MensSeedArray[i];
-                label.appendChild(input);
-
-                // span
-                let span = document.createElement("Span");
-                span.textContent = data.MensSeedArray[i];
-                label.appendChild(span);
-
-                if(i === 64 || i === 65){
-                    $(".11").append(p);
-                }else if(i === 66 || i === 67){
-                    $(".16").append(p);
-                }else{
-                    if(i >= 4){
-                        if(i % 4 === 0){
-                            x++;
+        
+                    if(data.WomensEntrySubmitted){
+                        $(".womensNoEntry").css("display", "none");
+                        $(".womensEntry").css("display", "block");
+                    }
+        
+                    $("#mensPointScore").css("color", "#99BADD");
+                    $("#womensPointScore").css("color", "#FFFFFF");
+        
+                    console.log(data.MensScore);
+                    let score = data.MensScore;
+                    $("#score").text(score.toString() + "pts");
+                });
+        
+                firebase.database().ref("Seeds/Mens").on("value", (snapshot) => {
+                    let data = snapshot.val();
+                    let y = 1;
+                    let x = 1;
+                    $(".contain").css("height", "auto");
+                    $(".seed").css("height", "350px");
+        
+                    for(let i = 0; i < data.MensSeedArray.length; i++){
+                        if(i === 64 || i === 65){
+                            y = 11;
+                        }else if(i === 66 || i === 67){
+                            y = 16;
+                        }else{
+                            if(i % 4 === 0 && i != 0){
+                                y++;
+                            }
+                        }
+        
+                        // p
+                        let p = document.createElement("p");
+        
+                        // Label
+                        let label = document.createElement("label");
+                        p.appendChild(label);
+        
+                        // input
+                        let input = document.createElement("input");
+                        input.type = "radio"
+                        input.name = "group" + y;
+                        input.value = data.MensSeedArray[i];
+                        label.appendChild(input);
+        
+                        // span
+                        let span = document.createElement("Span");
+                        span.textContent = data.MensSeedArray[i];
+                        label.appendChild(span);
+        
+                        if(i === 64 || i === 65){
+                            $(".11").append(p);
+                        }else if(i === 66 || i === 67){
+                            $(".16").append(p);
+                        }else{
+                            if(i >= 4){
+                                if(i % 4 === 0){
+                                    x++;
+                                    $("." + x).append(p);
+                                }
+                            }
+        
                             $("." + x).append(p);
                         }
                     }
-
-                    $("." + x).append(p);
-                }
-            }
-        });
-
-        firebase.database().ref("Seeds/Womens").on("value", (snapshot) => {
-            let data = snapshot.val();
-            let y = 1;
-            let x = 1;
-            $(".contain").css("height", "auto");
-            $(".seed").css("height", "350px");
-
-            for(let i = 0; i < data.WomensSeedArray.length; i++){
-                if(i === 64 || i === 65){
-                    y = 11;
-                }else if(i === 66 || i === 67){
-                    y = 16;
-                }else{
-                    if(i % 4 === 0 && i != 0){
-                        y++;
-                    }
-                }
-
-                // p
-                let p = document.createElement("p");
-
-                // Label
-                let label = document.createElement("label");
-                p.appendChild(label);
-
-                // input
-                let input = document.createElement("input");
-                input.type = "radio"
-                input.name = "groupw" + y;
-                input.value = data.WomensSeedArray[i];
-                label.appendChild(input);
-
-                // span
-                let span = document.createElement("Span");
-                span.textContent = data.WomensSeedArray[i];
-                label.appendChild(span);
-
-                if(i === 64 || i === 65){
-                    $(".w11").append(p);
-                }else if(i === 66 || i === 67){
-                    $(".w16").append(p);
-                }else{
-                    if(i >= 4){
-                        if(i % 4 === 0){
-                            x++;
+                });
+        
+                firebase.database().ref("Seeds/Womens").on("value", (snapshot) => {
+                    let data = snapshot.val();
+                    let y = 1;
+                    let x = 1;
+                    $(".contain").css("height", "auto");
+                    $(".seed").css("height", "350px");
+        
+                    for(let i = 0; i < data.WomensSeedArray.length; i++){
+                        if(i === 64 || i === 65){
+                            y = 11;
+                        }else if(i === 66 || i === 67){
+                            y = 16;
+                        }else{
+                            if(i % 4 === 0 && i != 0){
+                                y++;
+                            }
+                        }
+        
+                        // p
+                        let p = document.createElement("p");
+        
+                        // Label
+                        let label = document.createElement("label");
+                        p.appendChild(label);
+        
+                        // input
+                        let input = document.createElement("input");
+                        input.type = "radio"
+                        input.name = "groupw" + y;
+                        input.value = data.WomensSeedArray[i];
+                        label.appendChild(input);
+        
+                        // span
+                        let span = document.createElement("Span");
+                        span.textContent = data.WomensSeedArray[i];
+                        label.appendChild(span);
+        
+                        if(i === 64 || i === 65){
+                            $(".w11").append(p);
+                        }else if(i === 66 || i === 67){
+                            $(".w16").append(p);
+                        }else{
+                            if(i >= 4){
+                                if(i % 4 === 0){
+                                    x++;
+                                    $(".w" + x).append(p);
+                                }
+                            }
+        
                             $(".w" + x).append(p);
                         }
                     }
-
-                    $(".w" + x).append(p);
-                }
-            }
-        });
-
-        // Post Mens Teams and the Score
-        firebase.database().ref("Users/" + uid).on("child_added", (snapshot) => {
-            let data = snapshot.val();
-            if(data.Entries.MensEntrySubmitted){
-                for(let i = 0; i < data.Entries.MensEntry.length; i++){
-                    // console.log(i+1);
-                    let div = document.createElement("div");
-                    div.classList.add("col");
-                    div.classList.add("s6");
-                    div.classList.add("m3");
-    
-                    let h5 = document.createElement("h5");
-                    h5.textContent = "Seed " + (i+1) + " Choice: ";
-                    div.appendChild(h5);
-
-                    let p = document.createElement("p");
-
-                    let ref = data.Entries.MensEntry[i];
-
-                    firebase.database().ref("Seeds/Mens/TeamsScore").on("value", (snapshot) => {
-                        let dataTwo = snapshot.val();
-                        let team = dataTwo[ref];
-                        let total = 0;
-                        for(i in team){
-                            total += parseInt(team[i]);
-                        }
-
-                        p.textContent = ref + ": " + total + "pts";
-                        div.appendChild(p);
-                    })
-
-                    $(".mensEntry").append(div);
-
-                    firebase.database().ref("Seeds/Mens/TeamsScore/" + data.Entries.MensEntry[i]).on("value", (snapshot) => {
-                        let dataTwo = snapshot.val();
-                        for(i in dataTwo){
-                            userTotal += parseInt(dataTwo[i]);
-                        }
-
-                        if(userTotal > data.Entries.MensScore){
-                            firebase.database().ref("Users/" + uid + "/Entries").child("MensScore").transaction((Value) => {
-                                Value = userTotal;
-                                return Value;
-                            }).then(() => {
-                                $("#score").text(data.Entries.MensScore + "pts")
-                            });
-                        }else{
-                            $("#score").text(data.Entries.MensScore + "pts");
-                        }
-                    });
-                }
-    
-                let score = document.createElement("h4");
-                score.textContent = "Your current score is: ";
-                $(score).css("padding-top", "30px !important");
-    
-                // $(".mensEntry").append(score);
-            }
-
-            // console.log(data);
-        });
-
-        // Post Womens teams and the scores
-        firebase.database().ref("Users/" + uid).on("child_added", (snapshot) => {
-            let data = snapshot.val();
-            if(data.Entries.WomensEntrySubmitted){
-                for(let i = 0; i < data.Entries.WomensEntry.length; i++){
-                    let div = document.createElement("div");
-                    div.classList.add("col");
-                    div.classList.add("s6");
-                    div.classList.add("m3");
-    
-                    let h5 = document.createElement("h5");
-                    h5.textContent = "Seed " + (i+1) + " Choice: ";
-                    div.appendChild(h5);
-    
-                    let p = document.createElement("p");
-
-                    let ref = data.Entries.WomensEntry[i];
-
-                    firebase.database().ref("Seeds/Womens/TeamsScore").on("value", (snapshot) => {
-                        let dataTwo = snapshot.val();
-                        let team = dataTwo[ref];
-                        let total = 0;
-                        for(i in team){
-                            total += parseInt(team[i]);
-                        }
-
-                        p.textContent = ref + ": " + total + "pts";
-                        div.appendChild(p);
-                    })
-    
-                    $(".womensEntry").append(div);
-
-                    firebase.database().ref("Seeds/Womens/TeamsScore/" + data.Entries.WomensEntry[i]).on("value", (snapshot) => {
-                        let dataTwo = snapshot.val();
-                        for(i in dataTwo){
-                            userTotal += parseInt(dataTwo[i]);
-                        }
-
-                        if(userTotal > data.Entries.MensScore){
-                            firebase.database().ref("Users/" + uid + "/Entries").child("WomensScore").transaction((Value) => {
-                                Value = userTotal;
-                                return Value;
+                });
+        
+                // Post Mens Teams and the Score
+                firebase.database().ref("Users/" + uid).on("child_added", (snapshot) => {
+                    let data = snapshot.val();
+                    console.log(data);
+                    if(data.MensEntrySubmitted){
+                        for(let i = 0; i < data.MensEntry.length; i++){
+                            // console.log(i+1);
+                            let div = document.createElement("div");
+                            div.classList.add("col");
+                            div.classList.add("s6");
+                            div.classList.add("m3");
+            
+                            let h5 = document.createElement("h5");
+                            h5.textContent = "Seed " + (i+1) + " Choice: ";
+                            div.appendChild(h5);
+        
+                            let p = document.createElement("p");
+        
+                            let ref = data.MensEntry[i];
+        
+                            firebase.database().ref("Seeds/Mens/TeamsScore").on("value", (snapshot) => {
+                                let dataTwo = snapshot.val();
+                                let team = dataTwo[ref];
+                                let total = 0;
+                                for(i in team){
+                                    total += parseInt(team[i]);
+                                }
+        
+                                p.textContent = ref + ": " + total + "pts";
+                                div.appendChild(p);
+                            })
+        
+                            $(".mensEntry").append(div);
+        
+                            firebase.database().ref("Seeds/Mens/TeamsScore/" + data.MensEntry[i]).on("value", (snapshot) => {
+                                let dataTwo = snapshot.val();
+                                for(i in dataTwo){
+                                    userTotal += parseInt(dataTwo[i]);
+                                }
+        
+                                if(userTotal > data.MensScore){
+                                    firebase.database().ref("Users/" + uid + "/Entries").child("MensScore").transaction((Value) => {
+                                        Value = userTotal;
+                                        return Value;
+                                    }).then(() => {
+                                        $("#score").text(data.MensScore + "pts")
+                                    });
+                                }else{
+                                    $("#score").text(data.MensScore + "pts");
+                                }
                             });
                         }
-                    });
-                }
-    
-                let score = document.createElement("h4");
-                score.textContent = "Your current score is: ";
-                $(score).css("padding-top", "30px !important");
-    
-                // $(".womensEntry").append(score);
+            
+                        let score = document.createElement("h4");
+                        score.textContent = "Your current score is: ";
+                        $(score).css("padding-top", "30px !important");
+            
+                        // $(".mensEntry").append(score);
+                    }
+        
+                    // console.log(data);
+                });
+        
+                // Post Womens teams and the scores
+                firebase.database().ref("Users/" + uid).on("child_added", (snapshot) => {
+                    let data = snapshot.val();
+                    if(data.WomensEntrySubmitted){
+                        for(let i = 0; i < data.WomensEntry.length; i++){
+                            let div = document.createElement("div");
+                            div.classList.add("col");
+                            div.classList.add("s6");
+                            div.classList.add("m3");
+            
+                            let h5 = document.createElement("h5");
+                            h5.textContent = "Seed " + (i+1) + " Choice: ";
+                            div.appendChild(h5);
+            
+                            let p = document.createElement("p");
+        
+                            let ref = data.WomensEntry[i];
+        
+                            firebase.database().ref("Seeds/Womens/TeamsScore").on("value", (snapshot) => {
+                                let dataTwo = snapshot.val();
+                                let team = dataTwo[ref];
+                                let total = 0;
+                                for(i in team){
+                                    total += parseInt(team[i]);
+                                }
+        
+                                p.textContent = ref + ": " + total + "pts";
+                                div.appendChild(p);
+                            })
+            
+                            $(".womensEntry").append(div);
+        
+                            firebase.database().ref("Seeds/Womens/TeamsScore/" + data.WomensEntry[i]).on("value", (snapshot) => {
+                                let dataTwo = snapshot.val();
+                                for(i in dataTwo){
+                                    womensUserTotal += parseInt(dataTwo[i]);
+                                }
+        
+                                if(womensUserTotal > data.WomensScore){
+                                    firebase.database().ref("Users/" + uid + "/Entries").child("WomensScore").transaction((Value) => {
+                                        Value = womensUserTotal;
+                                        return Value;
+                                    });
+                                }
+                            });
+                        }
+            
+                        let score = document.createElement("h4");
+                        score.textContent = "Your current score is: ";
+                        $(score).css("padding-top", "30px !important");
+            
+                        // $(".womensEntry").append(score);
+                    }
+                });
             }
         });
 
@@ -327,8 +329,7 @@
                 EntryArray:arr
             });
         }).then(() => {
-            $(".entry").css("display", "block");
-            $(".fillEntry").css("display", "none");
+            location.replace('../html/seed.html');
         });
     }
 
@@ -351,8 +352,7 @@
                 EntryArray:arr
             });
         }).then(() => {
-            $(".entry").css("display", "block");
-            $(".fillEntry").css("display", "none");
+            location.replace('../html/seed.html');
         });
     }
 

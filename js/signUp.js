@@ -24,33 +24,51 @@
         let city = $("#city").val();
         let passOne = $("#passOne").val();
         let passTwo = $("#passTwo").val();
- 
-        if(passOne === passTwo && passOne.length > 8 && passOne.includes("1") || passOne.includes("2") || passOne.includes("3") || passOne.includes("4") || passOne.includes("5") || passOne.includes("6") || passOne.includes("7") || passOne.includes("8") || passOne.includes("9") || passOne.includes("0")){
-            firebase.auth().createUserWithEmailAndPassword(email, passOne);
-            firebase.auth().onAuthStateChanged((user) => {
-                if(user){
-                    console.log(user);
-                    let uid = user.uid
-                    firebase.database().ref("Users/" + uid + "/Info").set({
-                        FirstName: fname,
-                        LastName: lname,
-                        Eamil: email,
-                        State: state,
-                        City: city,
-                    }).then(() => {
-                        firebase.database().ref("Users/" + uid + "/Entries").set({
-                            MensEntrySubmitted:false,
-                            WomensEntrySubmitted:false,
-                            MensScore:0,
-                            WomensScore:0
+
+        if(fname === ""){
+            $("#fname").css("border-bottom-color", "red");
+            $("#fields").css("display", "block");
+        }else if(lname === ""){
+            $("#lname").css("border-bottom-color", "red");
+            $("#fields").css("display", "block");
+        }else if(email === ""){
+            $("#email").css("border-bottom-color", "red");
+            $("#fields").css("display", "block");
+
+        }else if(state === ""){
+            $("select").css("border-bottom-color", "red");
+            $("#fields").css("display", "block");
+        }else if(city === ""){
+            $("#city").css("border-bottom-color", "red");
+            $("#fields").css("display", "block");
+        }else{   
+            if(passOne === passTwo && passOne.length > 8 && passOne.includes("1") || passOne.includes("2") || passOne.includes("3") || passOne.includes("4") || passOne.includes("5") || passOne.includes("6") || passOne.includes("7") || passOne.includes("8") || passOne.includes("9") || passOne.includes("0")){
+                firebase.auth().createUserWithEmailAndPassword(email, passOne);
+                firebase.auth().onAuthStateChanged((user) => {
+                    if(user){
+                        console.log(user);
+                        let uid = user.uid
+                        firebase.database().ref("Users/" + uid + "/Info").set({
+                            FirstName: fname,
+                            LastName: lname,
+                            Eamil: email,
+                            State: state,
+                            City: city,
+                        }).then(() => {
+                            firebase.database().ref("Users/" + uid + "/Entries").set({
+                                MensEntrySubmitted:false,
+                                WomensEntrySubmitted:false,
+                                MensScore:0,
+                                WomensScore:0
+                            });
+                        }).then(() => {
+                            location.replace("../html/seed.html");
                         });
-                    }).then(() => {
-                        location.replace("../html/seed.html");
-                    });
-                }
-            });
-        }else{
-            $("#passOne, #passTwo").css("border-bottom-color", "red");
+                    }
+                });
+            }else{
+                $("#passOne, #passTwo").css("border-bottom-color", "red");
+            }
         }
     }
 })();
