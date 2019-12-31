@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/seed.css">
-    <link rel="stylesheet" href="../css/teams.css">
+    <link rel="stylesheet" href="../css/tracking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -17,7 +17,7 @@
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/teams.js"></script>
+    <script src="../js/tracking.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -43,37 +43,36 @@
                 </ul>
                 <!-- Divide -->
                 <div class="col s12 m12">
-                    <h1 class="col s12 m12 center-align">Teams</h1>
+                    <h1 class="col s12 m12 center-align">Player Rankings</h1>
                 </div>
                 <br>
                 <br>
                 <ul class="col s12 m10 offset-m1 tabs">
-                    <li class="col s6 m6 tab"><a href="#mens">Mens' Seeds</a></li>
-                    <li class="col s6 m6 tab"><a href="#womens">Womens' Seeds</a></li>
+                    <li class="col s6 m6 tab"><a href="#mens">Mens</a></li>
+                    <li class="col s6 m6 tab"><a href="#womens">Womens</a></li>
+                </ul>
+        </div>
+        <div class="col s12 m10 offset-m1 rankings">
+            <div id="mens"></div>
+            <div id="womens"></div>
+        </div>
+    </div>
+    <footer style="margin-bottom: 0px !important;" class="row">
+        <div class="col m10 offset-m1 left-align title">
+            <h3 class="left-align">Pointology</h3>
+            <div class="col m4">
+                <h5>Navigation</h5>
+                <ul>
+                    <li class="col s12 m12"><a href="index.html">Home</a></li>
+                    <li class="col s12 m12"><a href="about.html">About Pointology</a></li>
+                    <li class="col s12 m12"><a href="login.html">Login</a></li>
+                    <li class="col s12 m12"><a href="signUp.html" >Sign Up</a></li>
                 </ul>
             </div>
-            <div class="col s12 m10 offset-m1 teams">
-                <div id="mens"></div>
-                <div id="womens"></div>
+            <div class="col s12 m12 left-align tm">
+                <h3 class="left-align">&trade;</h3>
             </div>
         </div>
-        <footer style="margin-bottom: 0px !important;" class="row">
-            <div class="col m10 offset-m1 left-align title">
-                <h3 class="left-align">Pointology</h3>
-                <div class="col m4">
-                    <h5>Navigation</h5>
-                    <ul>
-                        <li class="col s12 m12"><a href="index.html">Home</a></li>
-                        <li class="col s12 m12"><a href="about.html">About Pointology</a></li>
-                        <li class="col s12 m12"><a href="login.html">Login</a></li>
-                        <li class="col s12 m12"><a href="signUp.html" >Sign Up</a></li>
-                    </ul>
-                </div>
-                <div class="col s12 m12 left-align tm">
-                    <h3 class="left-align">&trade;</h3>
-                </div>
-            </div>
-        </footer>
-    </div>
+    </footer>
 </body>
 </html>
