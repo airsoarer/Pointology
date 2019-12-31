@@ -1,0 +1,13 @@
+#mens, #womens {
+    margin-top: 50px;
+}
+
+.team {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    padding-left: 0px !important;
+}
+
+.teamList {
+    margin-top: 20px;
+}
