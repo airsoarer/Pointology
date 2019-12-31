@@ -92,5 +92,12 @@
         });
 
         $(".tabs").tabs();
+        $("#logout").on("click", logout);
+    }
+
+    function logout(){
+        firebase.auth().signOut().then(() => {
+            location.replace("../html/index.html");
+        });    
     }
 })();
