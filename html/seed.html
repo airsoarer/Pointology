@@ -42,11 +42,7 @@
                 </ul>
                 <!-- Divide -->
                 <div class="col m12">
-                    <h1 class="col m7 right-align" id="score">0pts</h1>
-                    <div class="col m5 left-align" style="padding-top: 55px;">
-                        <button class="col s12 m12 left-align" id="mensPointScore">MENS</button>
-                        <button class="col s12 m12 left-align" id="womensPointScore">WOMENS</button>
-                    </div>
+                    <h1 class="col m12 center-align">My Entries</h1>
                 </div>
                 <br>
                 <br>
@@ -67,11 +63,14 @@
         </div>
         <div class="contain">
             <div class="row mens" id="mens">
-                <div class="col m10 offset-m1 center-align mensNoEntry">
-                    <h3>Not Selected Mens Teams Yet</h3>
-                    <button id="mensFillOut">Choose Teams</button>
+                <div class="col m10 offset-m1 left-align mensNoEntry">
+                    <h3 style="margin-bottom: 50px !important;" class="col m6">Fill out an Entry</h3>
+                    <button style="margin-top: 30px !important;" class="col m2 offset-m4" id="mensFillOut">Mens</button>
                 </div>
                 <div id="mensFill" class="col m10 offset-m1 center-align fillEntry">
+                    <input placeholder="Enter a name for your Entry" type="text" class="col m12" id="mensEntryName">
+                    <span style="display:none;" class="col m12 s12" id="noMensName">Please enter a Entry Name</span>
+                    <br><br><br>
                     <div class="col m3 seed 1">
                         <h4>Seed 1</h4>
                     </div>
@@ -125,16 +124,19 @@
                     </div>
                     <button class="col m4" id="submit">Submit Men's Entry</button>
                 </div>
-                <div class="col m10 offset-m1 mensEntry">
+                <ul class="collapsible col m10 offset-m1 mensEntry">
                     <!-- <h3>Your Mens Entry</h3> -->
-                </div>
+                </ul>
             </div>
             <div class="row womens" id="womens">
-                <div class="col m12 center-align womensNoEntry">
-                    <h3>Not Selected Womens Teams Yet</h3>
-                    <button id="womensFillOut">Choose Teams</button>
+                <div class="col m10 offset-m1 left-align womensNoEntry">
+                    <h3 style="margin-bottom: 50px !important;" class="col m6">Fill out an Entry</h3>
+                    <button style="margin-top: 30px !important;" class="col m2 offset-m4" id="womensFillOut">Womens</button>
                 </div>
                 <div id="womensFill" class="col m10 offset-m1 center-align fillEntry">
+                    <input placeholder="Enter a name for your Entry" type="text" class="col m12" id="womensEntryName">
+                    <span style="display:none;" class="col m12 s12" id="noWomensName">Please enter a Entry Name</span>
+                    <br><br><br>
                     <div class="col m3 seed w1">
                         <h4>Seed 1</h4>
                     </div>
@@ -188,7 +190,7 @@
                     </div>
                     <button class="col m4" id="womensSubmit">Submit Men's Entry</button>
                 </div>
-                <div class="col m10 offset-m1 womensEntry">
+                <div class="collapsible col m10 offset-m1 womensEntry">
                     <!-- <h3>Your Womens Entry</h3> -->
                 </div>
             </div>

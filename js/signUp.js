@@ -19,6 +19,7 @@
     function signUp(){
         let fname = $("#fname").val();
         let lname = $("#lname").val();
+        let teamName = $("#team").val();
         let email = $("#email").val();
         let state = $('select').val();
         let city = $("#city").val();
@@ -31,10 +32,12 @@
         }else if(lname === ""){
             $("#lname").css("border-bottom-color", "red");
             $("#fields").css("display", "block");
+        }else if(team === ""){
+            $("#team").css("border-bottom-color", "red");
+            $("#fields").css("display", "block");
         }else if(email === ""){
             $("#email").css("border-bottom-color", "red");
             $("#fields").css("display", "block");
-
         }else if(state === ""){
             $("select").css("border-bottom-color", "red");
             $("#fields").css("display", "block");
@@ -43,7 +46,12 @@
             $("#fields").css("display", "block");
         }else{   
             if(passOne === passTwo && passOne.length > 8 && passOne.includes("1") || passOne.includes("2") || passOne.includes("3") || passOne.includes("4") || passOne.includes("5") || passOne.includes("6") || passOne.includes("7") || passOne.includes("8") || passOne.includes("9") || passOne.includes("0")){
-                firebase.auth().createUserWithEmailAndPassword(email, passOne);
+                firebase.auth().createUserWithEmailAndPassword(email, passOne).catch((err) => {
+                    if(err.code === "auth/email-already-in-use"){
+                        $("#email").css("border-bottom-color", "red");
+                        $("#emailInUse").css("display", "block");
+                    }
+                });
                 firebase.auth().onAuthStateChanged((user) => {
                     if(user){
                         console.log(user);
@@ -54,13 +62,6 @@
                             Eamil: email,
                             State: state,
                             City: city,
-                        }).then(() => {
-                            firebase.database().ref("Users/" + uid + "/Entries").set({
-                                MensEntrySubmitted:false,
-                                WomensEntrySubmitted:false,
-                                MensScore:0,
-                                WomensScore:0
-                            });
                         }).then(() => {
                             location.replace("../html/seed.html");
                         });

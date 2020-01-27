@@ -21,22 +21,11 @@
 
                 firebase.database().ref("Users/" + uid).once("child_added", (snapshot) => {
                     let data = snapshot.val();
-                    if(data.MensEntrySubmitted){
-                        $(".mensNoEntry").css("display", "none");
-                        $(".mensEntry").css("display", "block");
-                    }
-        
-                    if(data.WomensEntrySubmitted){
-                        $(".womensNoEntry").css("display", "none");
-                        $(".womensEntry").css("display", "block");
-                    }
-        
                     $("#mensPointScore").css("color", "#99BADD");
                     $("#womensPointScore").css("color", "#FFFFFF");
         
-                    console.log(data.MensScore);
-                    let score = data.MensScore;
-                    $("#score").text(score.toString() + "pts");
+                    // let score = data.MensScore;
+                    // $("#score").text(score.toString() + "pts");
                 });
         
                 firebase.database().ref("Seeds/Mens").on("value", (snapshot) => {
@@ -148,128 +137,183 @@
                 });
         
                 // Post Mens Teams and the Score
-                firebase.database().ref("Users/" + uid).on("child_added", (snapshot) => {
+                firebase.database().ref("Users/" + uid + "/Entries/Mens").on("child_added", (snapshot) => {
                     let data = snapshot.val();
-                    console.log(data);
-                    if(data.MensEntrySubmitted){
-                        for(let i = 0; i < data.MensEntry.length; i++){
-                            // console.log(i+1);
-                            let div = document.createElement("div");
-                            div.classList.add("col");
-                            div.classList.add("s6");
-                            div.classList.add("m3");
-            
-                            let h5 = document.createElement("h5");
-                            h5.textContent = "Seed " + (i+1) + " Choice: ";
-                            div.appendChild(h5);
+                    let key = snapshot.key;
+                    let userTotal = 0;
+
+
+                    let li = document.createElement("li");
+                    li.classList.add("col");
+                    li.classList.add("m12");
+                        
+                    let headerDiv = document.createElement("div");
+                    headerDiv.classList.add("collapsible-header");
+                    li.appendChild(headerDiv);
+
+                    let headerh4 = document.createElement("h4");
+                    headerh4.textContent = data.EntryName;
+                    headerDiv.appendChild(headerh4);
+
+                    let bodyDiv = document.createElement("div");
+                    bodyDiv.classList.add("collapsible-body");
+                    li.appendChild(bodyDiv);
+
+                    let score = document.createElement("h4");
+                    score.classList.add("col");
+                    score.classList.add("m12");
+                    score.classList.add("center-align");
+
+                    for(let i = 0; i < data.Array.length; i++){
+                        // console.log(i+1);
+                        let div = document.createElement("div");
+                        div.classList.add("col");
+                        div.classList.add("m3");
+                        bodyDiv.appendChild(div);
+
+                        let h5 = document.createElement("h5");
+                        h5.textContent = "Seed " + (i+1) + " Choice: ";
+                        div.appendChild(h5);
+    
+                        let p = document.createElement("p");;
+    
+                        let ref = data.Array[i];
+    
+                        firebase.database().ref("Seeds/Mens/TeamsScore").on("value", (snapshot) => {
+                            let dataTwo = snapshot.val();
+                            let team = dataTwo[ref];
+                            let total = 0;
+                            for(i in team){
+                                total += parseInt(team[i]);
+                            }
+    
+                            p.textContent = ref + ": " + total + "pts";
+                            div.appendChild(p);
+                        })
+    
+                        $(".mensEntry").append(li);
+    
+                        firebase.database().ref("Seeds/Mens/TeamsScore/" + data.Array[i]).on("value", (snapshot) => {
+                            let dataTwo = snapshot.val();
+                            for(i in dataTwo){
+                                userTotal += parseInt(dataTwo[i]);
+                            }
+
+                            if(userTotal > data.Score){
+                                firebase.database().ref("Users/" + uid + "/Entries/Mens/" + key).child("Score").transaction((Value) => {
+                                    Value = userTotal;
+                                    return Value;
+                                }).then(() => {
+                                    score.textContent = "Total Score: " + userTotal + "pts.";
+                                });
+                            }else{
+                                score.textContent = "Total Score: " + data.Score + "pts.";
+                            }
+                        });
+                    }
         
-                            let p = document.createElement("p");
-        
-                            let ref = data.MensEntry[i];
-        
-                            firebase.database().ref("Seeds/Mens/TeamsScore").on("value", (snapshot) => {
-                                let dataTwo = snapshot.val();
-                                let team = dataTwo[ref];
-                                let total = 0;
-                                for(i in team){
-                                    total += parseInt(team[i]);
-                                }
-        
-                                p.textContent = ref + ": " + total + "pts";
-                                div.appendChild(p);
-                            })
-        
-                            $(".mensEntry").append(div);
-        
-                            firebase.database().ref("Seeds/Mens/TeamsScore/" + data.MensEntry[i]).on("value", (snapshot) => {
-                                let dataTwo = snapshot.val();
-                                for(i in dataTwo){
-                                    userTotal += parseInt(dataTwo[i]);
-                                }
-        
-                                if(userTotal > data.MensScore){
-                                    firebase.database().ref("Users/" + uid + "/Entries").child("MensScore").transaction((Value) => {
-                                        Value = userTotal;
-                                        return Value;
-                                    }).then(() => {
-                                        $("#score").text(data.MensScore + "pts")
-                                    });
-                                }else{
-                                    $("#score").text(data.MensScore + "pts");
-                                }
-                            });
-                        }
-            
-                        let score = document.createElement("h4");
-                        score.textContent = "Your current score is: ";
-                        $(score).css("padding-top", "30px !important");
+                    bodyDiv.appendChild(score);
+
+                    // let score = document.createElement("h4");
+                    // score.textContent = "Your current score is: ";
+                    // $(score).css("padding-top", "30px !important");
             
                         // $(".mensEntry").append(score);
-                    }
         
                     // console.log(data);
                 });
         
                 // Post Womens teams and the scores
-                firebase.database().ref("Users/" + uid).on("child_added", (snapshot) => {
+                firebase.database().ref("Users/" + uid + "/Entries/Womens").on("child_added", (snapshot) => {
                     let data = snapshot.val();
-                    if(data.WomensEntrySubmitted){
-                        for(let i = 0; i < data.WomensEntry.length; i++){
-                            let div = document.createElement("div");
-                            div.classList.add("col");
-                            div.classList.add("s6");
-                            div.classList.add("m3");
-            
-                            let h5 = document.createElement("h5");
-                            h5.textContent = "Seed " + (i+1) + " Choice: ";
-                            div.appendChild(h5);
-            
-                            let p = document.createElement("p");
+                    let key = snapshot.key;
+                    let womensUserTotal = 0;
+
+                    let li = document.createElement("li");
+                    li.classList.add("col");
+                    li.classList.add("m12");
+                        
+                    let headerDiv = document.createElement("div");
+                    headerDiv.classList.add("collapsible-header");
+                    li.appendChild(headerDiv);
+
+                    let headerh4 = document.createElement("h4");
+                    headerh4.textContent = data.EntryName;
+                    headerDiv.appendChild(headerh4);
+
+                    let bodyDiv = document.createElement("div");
+                    bodyDiv.classList.add("collapsible-body");
+                    li.appendChild(bodyDiv);
+
+                    let score = document.createElement("h4");
+                    score.classList.add("col");
+                    score.classList.add("m12");
+                    score.classList.add("center-align");
+
+                    for(let i = 0; i < data.Array.length; i++){
+                        let div = document.createElement("div");
+                        div.classList.add("col");
+                        div.classList.add("m3");
+                        bodyDiv.appendChild(div);
+
+                        let h5 = document.createElement("h5");
+                        h5.textContent = "Seed " + (i+1) + " Choice: ";
+                        div.appendChild(h5);
+    
+                        let p = document.createElement("p");;
+    
+                        let ref = data.Array[i];
+    
+                        firebase.database().ref("Seeds/Womens/TeamsScore").on("value", (snapshot) => {
+                            let dataTwo = snapshot.val();
+                            let team = dataTwo[ref];
+                            let total = 0;
+                            for(i in team){
+                                total += parseInt(team[i]);
+                            }
+    
+                            p.textContent = ref + ": " + total + "pts";
+                            div.appendChild(p);
+                        })
         
-                            let ref = data.WomensEntry[i];
+                        $(".womensEntry").append(li);
+    
+                        firebase.database().ref("Seeds/Womens/TeamsScore/" + data.Array[i]).on("value", (snapshot) => {
+                            let dataTwo = snapshot.val();
+                            for(i in dataTwo){
+                                womensUserTotal += parseInt(dataTwo[i]);
+                            }
+    
+                            if(womensUserTotal > data.Score){
+                                firebase.database().ref("Users/" + uid + "/Entries/Womens/" + key).child("Score").transaction((Value) => {
+                                    Value = womensUserTotal;
+                                    return Value;
+                                }).then(() => {
+                                    score.textContent = "Total Score: " + womensUserTotal + "pts."; 
+                                });
+                            }else{
+                                score.textContent = "Total Score: " + data.Score + "pts.";
+                            }
+                        });
+
+                        bodyDiv.appendChild(score);
+                    }
         
-                            firebase.database().ref("Seeds/Womens/TeamsScore").on("value", (snapshot) => {
-                                let dataTwo = snapshot.val();
-                                let team = dataTwo[ref];
-                                let total = 0;
-                                for(i in team){
-                                    total += parseInt(team[i]);
-                                }
-        
-                                p.textContent = ref + ": " + total + "pts";
-                                div.appendChild(p);
-                            })
-            
-                            $(".womensEntry").append(div);
-        
-                            firebase.database().ref("Seeds/Womens/TeamsScore/" + data.WomensEntry[i]).on("value", (snapshot) => {
-                                let dataTwo = snapshot.val();
-                                for(i in dataTwo){
-                                    womensUserTotal += parseInt(dataTwo[i]);
-                                }
-        
-                                if(womensUserTotal > data.WomensScore){
-                                    firebase.database().ref("Users/" + uid + "/Entries").child("WomensScore").transaction((Value) => {
-                                        Value = womensUserTotal;
-                                        return Value;
-                                    });
-                                }
-                            });
-                        }
-            
-                        let score = document.createElement("h4");
-                        score.textContent = "Your current score is: ";
-                        $(score).css("padding-top", "30px !important");
+                    // let score = document.createElement("h4");
+                    // score.textContent = "Your current score is: ";
+                    // $(score).css("padding-top", "30px !important");
             
                         // $(".womensEntry").append(score);
-                    }
                 });
             }
         });
 
         // mensPoints();
 
+        firebase.database().ref().off();
+
         $('.tabs').tabs();
+        $('.collapsible').collapsible();
         $("#logout").on("click", logout);
         $("#submit").on("click", submitMens);
         $("#womensSubmit").on("click", submitWomens);
@@ -284,7 +328,6 @@
         $("#womensPointScore").css("color", "#FFFFFF");
         firebase.database().ref("Users/" + uid).on("value", (snapshot) => {
             let data = snapshot.val();
-            console.log(data);
             let score = data.Entries.MensScore;
             $("#score").text(score.toString() + "pts");
         });
@@ -295,65 +338,84 @@
         $("#mensPointScore").css("color", "#FFFFFF");
         firebase.database().ref("Users/" + uid).on("value", (snapshot) => {
             let data = snapshot.val();
-            console.log(data);
             $("#score").text(data.Entries.WomensScore.toString() + "pts");
         });
     }
 
     function showWomensForm(){
-        $(".womensNoEntry").css("display", "none");
+        $(".womensEntry").css("display", "none");
         $("#womensFill").css("display", "block");
     }
 
     function showMensForm(){
-        $(".mensNoEntry").css("display", "none");
+        $(".mensEntry").css("display", "none");
         $("#mensFill").css("display", "block");
     }
 
     function submitWomens(){
         let arr = []
+        let name = $("#womensEntryName").val();
+        let key = firebase.database().ref("Users/" + uid + "/Entries").child("Womens").push().key;
+
+        if(name === ""){
+            $("#womensEntryName").css("border-bottom-color", "red");
+            $("#noWomensName").css("display", "block");
+            return;
+        }
+
         for(let i = 1; i < 17; i++){
             arr.push($("input[name=groupw" + i + "]:checked").val());
         }
 
-        firebase.database().ref("Users/" + uid + "/Entries").update({
-            WomensEntry:arr
-        }).then(() => {
-            firebase.database().ref("Users/" + uid + "/Entries").child("WomensEntrySubmitted").transaction((entry) => {
-                entry = true;
-                return entry;
-            });
-        }).then(() => {
-            firebase.database().ref("Admin/WomensEntries/").push({
-                UID:uid,
-                EntryArray:arr
-            });
-        }).then(() => {
-            location.replace('../html/seed.html');
-        });
+        let data = {};
+        data["Admin/WomensEntries/" + key] = {
+            UID:uid,
+            EntryName:name,
+            EntryUID:key,
+            EntryArray:arr
+        };
+        data["Users/" + uid + "/Entries/Womens/" + key] = {
+            Array:arr,
+            EntryName:name,
+            Score:0
+        }
+
+        return firebase.database().ref().update(data).then(() => {
+            location.replace("../html/seed.html");
+        })
     }
 
     function submitMens(){
         let arr = []
+        let key = firebase.database().ref("Users/" + uid + "/Entries").child("Mens").push().key;
+        let name = $("#mensEntryName").val();
+
+        if(name === ""){
+            $("#mensEntryName").css("border-bottom-color", "red");
+            $("#noMensName").css("display", "block");
+            return;
+        }
+
         for(let i = 1; i < 17; i++){
             arr.push($("input[name=group" + i + "]:checked").val());
         }
 
-        firebase.database().ref("Users/" + uid + "/Entries").update({
-            MensEntry:arr
-        }).then(() => {
-            firebase.database().ref("Users/" + uid + "/Entries").child("MensEntrySubmitted").transaction((entry) => {
-                entry = true;
-                return entry;
-            });
-        }).then(() => {
-            firebase.database().ref("Admin/MensEntries/").push({
-                UID:uid,
-                EntryArray:arr
-            });
-        }).then(() => {
-            location.replace('../html/seed.html');
-        });
+        let data = {};
+        data["Admin/MensEntries/" + key] = {
+            UID:uid,
+            EntryName:name,
+            EntryUID:key,
+            EntryArray:arr
+        };
+        data["Users/" + uid + "/Entries/Mens/" + key] = {
+            Array:arr,
+            EntryName:name,
+            Score:0
+        }
+
+        return firebase.database().ref().update(data).then(() => {
+            location.replace("../html/seed.html");
+        })
     }
 
     function logout(){

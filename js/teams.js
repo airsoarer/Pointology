@@ -10,8 +10,15 @@
         appId: "1:404283995990:web:fa100e3015ce504f2648f7"
     };
 
+    let mensTotalTeam = 0;
+    let womensTotalTeam = 0;
+
     function init(){
         firebase.initializeApp(firebaseConfig);
+
+        let mensTotalTeam = 0;
+        let womensTotalTeam = 0;
+
         firebase.database().ref("Seeds/Mens").on("value", (snapshot) => {
             let data = snapshot.val();
             for(i in data.MensSeedArray){
@@ -38,6 +45,8 @@
                     h5.classList.add("m1");
                     $(h5).css("padding-top", "20px !important;")
 
+                    mensTotalTeam += parseInt(data.TeamsScore[data.MensSeedArray[i]][y]);
+
                     for(x in data.OutTeams){
                         if(data.MensSeedArray[i] === data.OutTeams[x]){
                             $(h5).css("color", "red");
@@ -46,6 +55,14 @@
 
                     div.appendChild(h5);
                 }
+
+                let h5Total = document.createElement("h5");
+                h5Total.textContent = "Total: " + mensTotalTeam;
+                h5Total.classList.add("col");
+                h5Total.classList.add("m2");
+                div.appendChild(h5Total);
+
+                mensTotalTeam = 0;
 
                 $("#mens").append(div);
             }
@@ -78,6 +95,8 @@
                     h5.classList.add("m1");
                     $(h5).css("padding-top", "20px !important;")
 
+                    womensTotalTeam += parseInt(data.TeamsScore[data.WomensSeedArray[i]][y]);
+
                     for(x in data.OutTeams){
                         if(data.WomensSeedArray[i] === data.OutTeams[x]){
                             $(h5).css("color", "red");
@@ -86,6 +105,14 @@
 
                     div.appendChild(h5);
                 }
+
+                let h5Total = document.createElement("h5");
+                h5Total.textContent = "Total: " + womensTotalTeam;
+                h5Total.classList.add("col");
+                h5Total.classList.add("m2");
+                div.appendChild(h5Total);
+
+                womensTotalTeam = 0;
 
                 $("#womens").append(div);
             }

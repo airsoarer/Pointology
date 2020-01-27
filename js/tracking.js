@@ -14,17 +14,20 @@
         firebase.initializeApp(firebaseConfig);
         firebase.auth().onAuthStateChanged((user) => {
             if(user){
-                let i = 0;
                 let userUid = user.uid
                 firebase.database().ref("Admin/MensEntries/").on("child_added", (snapshot) => {
                     let data = snapshot.val();
-                    let uid = data.UID
+                    let uid = data.UID;
+                    let entryUID = data.EntryUID;
+                    let i = 0;
+                    // console.log(data);
         
-                    firebase.database().ref("Users/" + uid + "/Entries").once("value", (snapshot) => {
+                    firebase.database().ref("Users/" + uid + "/Entries/Mens/" + entryUID).once("value", (snapshot) => {
                         let dataTwo = snapshot.val();
+                        console.log(dataTwo);
         
                         let div = document.createElement("div");
-                        div.id = dataTwo.MensScore;
+                        div.id = dataTwo.Score;
                         div.classList.add("col");
                         div.classList.add("m12");
                         div.classList.add("a" + uid);
@@ -46,12 +49,14 @@
                         let name = document.createElement("h5");
                         name.classList.add("col");
                         name.classList.add("m7");
+                        name.classList.add("truncate");
+                        // name.textContent = dataTwo.EntryName;
                         $(name).css("font-weight", "600");
                         // name.classList.add("center-align")
         
                         firebase.database().ref("Users/" + uid + "/Info").on("value", (snapshot) => {
                             let dataThree = snapshot.val();
-                            name.textContent = dataThree.FirstName + " " + dataThree.LastName;
+                            name.textContent = dataTwo.EntryName + " - " + dataThree.FirstName + " " + dataThree.LastName;
                         });
         
                         div.appendChild(name);
@@ -78,9 +83,9 @@
                         modalTitle.textContent = "Chosen Teams: ";
                         modalContentDiv.appendChild(modalTitle);
 
-                        for(let i = 0; i < dataTwo.MensEntry.length; i++){
+                        for(let i = 0; i < dataTwo.Array.length; i++){
                             let p = document.createElement("p");
-                            p.textContent = dataTwo.MensEntry[i] + " ";
+                            p.textContent = dataTwo.Array[i] + " ";
                             p.classList.add("col");
                             p.classList.add("m3");
                             p.classList.add("team");
@@ -93,7 +98,7 @@
                         score.classList.add("m2");
                         score.classList.add("center-align");
                         score.classList.add("score");
-                        score.textContent = dataTwo.MensScore;
+                        score.textContent = dataTwo.Score;
                         $(score).css("font-weight", "600");
                         div.appendChild(score)
 
@@ -155,15 +160,18 @@
 
                 // =============== WOMENS ======================
 
+                let z = 0;
                 firebase.database().ref("Admin/WomensEntries/").on("child_added", (snapshot) => {
                     let data = snapshot.val();
                     let uid = data.UID
-        
-                    firebase.database().ref("Users/" + uid + "/Entries").once("value", (snapshot) => {
+                    let entryUID = data.EntryUID;
+
+                    firebase.database().ref("Users/" + uid + "/Entries/Womens/" + entryUID).once("value", (snapshot) => {
                         let dataTwo = snapshot.val();
+                        console.log(z);
         
                         let div = document.createElement("div");
-                        div.id = dataTwo.WomensScore;
+                        div.id = dataTwo.Score;
                         div.classList.add("col");
                         div.classList.add("m12");
                         div.classList.add("a" + uid);
@@ -185,19 +193,20 @@
                         let name = document.createElement("h5");
                         name.classList.add("col");
                         name.classList.add("m7");
+                        name.classList.add("truncate");
                         $(name).css("font-weight", "600");
                         // name.classList.add("center-align")
         
                         firebase.database().ref("Users/" + uid + "/Info").on("value", (snapshot) => {
                             let dataThree = snapshot.val();
-                            name.textContent = dataThree.FirstName + " " + dataThree.LastName;
+                            name.textContent = dataTwo.EntryName + " - " + dataThree.FirstName + " " + dataThree.LastName;
                         });
         
                         div.appendChild(name);
 
                         let a = document.createElement("a");
                         a.textContent = "View Teams";
-                        a.href = "#modalw" + i;
+                        a.href = "#modalw" + z;
                         a.classList.add("col");
                         a.classList.add("m2");
                         a.classList.add("teamViewBtn");
@@ -206,7 +215,7 @@
 
                         let modalDiv = document.createElement("div");
                         modalDiv.classList.add("modal");
-                        modalDiv.id = "modalw" + i;
+                        modalDiv.id = "modalw" + z;
                         div.appendChild(modalDiv);
 
                         let modalContentDiv = document.createElement("div");
@@ -217,9 +226,10 @@
                         modalTitle.textContent = "Chosen Teams: ";
                         modalContentDiv.appendChild(modalTitle);
 
-                        for(let i = 0; i < dataTwo.WomensEntry.length; i++){
+                        // console.log(dataTwo.WomensEntry);
+                        for(let i = 0; i < dataTwo.Array.length; i++){
                             let p = document.createElement("p");
-                            p.textContent = dataTwo.WomensEntry[i] + " ";
+                            p.textContent = dataTwo.Array[i] + " ";
                             p.classList.add("col");
                             p.classList.add("m3");
                             p.classList.add("team");
@@ -232,7 +242,7 @@
                         score.classList.add("m2");
                         score.classList.add("center-align");
                         score.classList.add("score");
-                        score.textContent = dataTwo.WomensScore;
+                        score.textContent = dataTwo.Score;
                         $(score).css("font-weight", "600");
                         div.appendChild(score)
 
@@ -241,22 +251,6 @@
                         hr.classList.add("m11");
                         hr.classList.add("offset-m1");
                         div.appendChild(hr);
-
-                        // let teamDiv = document.createElement("div");
-                        // teamDiv.classList.add("col");
-                        // teamDiv.classList.add("m12");
-                        // teamDiv.classList.add("teamList");
-                        // div.appendChild(teamDiv);
-
-                        // for(let i = 0; i < dataTwo.WomensEntry.length; i++){
-                        //     let p = document.createElement("p");
-                        //     p.textContent = dataTwo.WomensEntry[i] + " ";
-                        //     p.classList.add("col");
-                        //     p.classList.add("m3");
-                        //     p.classList.add("team");
-                        //     p.classList.add("center-align")
-                        //     teamDiv.appendChild(p);
-                        // }
         
                         $("#womens").append(div);
                         
@@ -288,6 +282,9 @@
                             document.querySelector("." + classSplit[1] + " .placew").textContent = (i + 1);
                             container.appendChild(sortMe[i][1]);
                         }
+
+                        z++;
+                        $(".modal").modal();
                     });
                 });
             }
