@@ -59,7 +59,7 @@ p {
 }
 
 .banner {
-    background-image: url("../images/banner.png");
+    background-image: url("../images/banner.PNG");
     background-size: contain;
     height: 100vh;
 }
