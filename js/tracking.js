@@ -24,7 +24,6 @@
         
                     firebase.database().ref("Users/" + uid + "/Entries/Mens/" + entryUID).once("value", (snapshot) => {
                         let dataTwo = snapshot.val();
-                        console.log(dataTwo);
         
                         let div = document.createElement("div");
                         div.id = dataTwo.Score;
@@ -168,13 +167,12 @@
 
                     firebase.database().ref("Users/" + uid + "/Entries/Womens/" + entryUID).once("value", (snapshot) => {
                         let dataTwo = snapshot.val();
-                        console.log(z);
         
                         let div = document.createElement("div");
                         div.id = dataTwo.Score;
                         div.classList.add("col");
                         div.classList.add("m12");
-                        div.classList.add("a" + uid);
+                        div.classList.add("a" + entryUID);
                         if(uid === userUid){
                             $(div).css("border", "solid 2px green");
                             $(div).css("background-color", "rgba(144, 283, 144, .3");
@@ -276,10 +274,21 @@
                         });
                         // finally append the sorted elements again, the old element will be moved to
                         // the new position
+                        let x = 1;
                         for (let i = 0; i < sortMe.length; i++) {
                             // remember that the second array element contains the element itself
                             let classSplit = sortMe[i][1].className.split("col m12 ");
-                            document.querySelector("." + classSplit[1] + " .placew").textContent = (i + 1);
+                            if(i != 0){
+                                if(sortMe[i - 1][1].id == sortMe[i][1].id){
+                                    let temp = classSplit[1].replace(" ", "");
+                                    $("." + temp + "  .placew").text(x);
+                                }else{
+                                    x++;
+                                    // console.log(sortMe[i][1].id, sortMe[i - 1][1].id, x);
+                                    let temp = classSplit[1].replace(" ", "");
+                                    $("." + temp + " .placew").text(x);
+                                }
+                            }
                             container.appendChild(sortMe[i][1]);
                         }
 

@@ -36,10 +36,11 @@
             li.appendChild(divHeader);
 
             firebase.database().ref("Users/" + data.UID + "/Info").on("value", (snapshot) => {
-                let data = snapshot.val();
+                let dataTwo = snapshot.val();
 
                 let h5 = document.createElement("h5");
-                h5.textContent = data.FirstName + " " + data.LastName;
+                h5.classList.add("truncate");
+                h5.textContent = data.EntryName + " - " + dataTwo.FirstName + " " + dataTwo.LastName;
                 divHeader.appendChild(h5);
             });
 
@@ -68,9 +69,9 @@
             currentScore.classList.add("score");
             divBody.appendChild(currentScore);
 
-            firebase.database().ref("Users/" + data.UID).on("value", (snapshot) => {
+            firebase.database().ref("Users/" + data.UID + "/Entries/Mens/" + data.EntryUID).on("value", (snapshot) => {
                 let data = snapshot.val();
-                currentScore.textContent = "Current Score: " + data.Entries.MensScore + "pts";
+                currentScore.textContent = "Current Score: " + data.Score + "pts";
             });
 
             $(".mensCollapsible").append(li);
@@ -86,10 +87,10 @@
             li.appendChild(divHeader);
 
             firebase.database().ref("Users/" + data.UID + "/Info").on("value", (snapshot) => {
-                let data = snapshot.val();
+                let dataTwo = snapshot.val();
 
                 let h5 = document.createElement("h5");
-                h5.textContent = data.FirstName + " " + data.LastName;
+                h5.textContent = data.EntryName + " - " + dataTwo.FirstName + " " + dataTwo.LastName;
                 divHeader.appendChild(h5);
             });
 
