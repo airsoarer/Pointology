@@ -119,9 +119,9 @@
             currentScore.classList.add("score");
             divBody.appendChild(currentScore);
 
-            firebase.database().ref("Users/" + data.UID).on("value", (snapshot) => {
+            firebase.database().ref("Users/" + data.UID + "/Entries/Womens").on("child_added", (snapshot) => {
                 let data = snapshot.val();
-                currentScore.textContent = "Current Score: " + data.Entries.WomensScore + "pts";
+                currentScore.textContent = "Current Score: " + data.Score + "pts";
             });
 
             $(".womensCollapsible").append(li);

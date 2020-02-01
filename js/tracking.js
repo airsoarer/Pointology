@@ -15,15 +15,17 @@
         firebase.auth().onAuthStateChanged((user) => {
             if(user){
                 let userUid = user.uid
+                let i = 0;
                 firebase.database().ref("Admin/MensEntries/").on("child_added", (snapshot) => {
                     let data = snapshot.val();
                     let uid = data.UID;
                     let entryUID = data.EntryUID;
-                    let i = 0;
+                    // let i = 0;
                     // console.log(data);
         
                     firebase.database().ref("Users/" + uid + "/Entries/Mens/" + entryUID).once("value", (snapshot) => {
                         let dataTwo = snapshot.val();
+                        console.log(i);
         
                         let div = document.createElement("div");
                         div.id = dataTwo.Score;
@@ -82,7 +84,9 @@
                         modalTitle.textContent = "Chosen Teams: ";
                         modalContentDiv.appendChild(modalTitle);
 
+                        // console.log(dataTwo.Array);
                         for(let i = 0; i < dataTwo.Array.length; i++){
+                            // console.log(dataTwo.Array[i]);
                             let p = document.createElement("p");
                             p.textContent = dataTwo.Array[i] + " ";
                             p.classList.add("col");
@@ -225,6 +229,7 @@
                         modalContentDiv.appendChild(modalTitle);
 
                         // console.log(dataTwo.WomensEntry);
+                        // console.log(dataTwo);
                         for(let i = 0; i < dataTwo.Array.length; i++){
                             let p = document.createElement("p");
                             p.textContent = dataTwo.Array[i] + " ";
